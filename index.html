@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        const { api } = window;
+    
+        // Send messages to the main process
+        api.send('message', 'Hello from the renderer process!');
+    
+        // Receive messages from the main process (e.g., Python script output)
+        window.addEventListener('ipc-message', (event, arg) => {
+            console.log(arg); // Handle the message from the Python script
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">AI Assistant</div>
+        <div class="user-profile">👤</div>
+    </header>
+    <main>
+        <div class="chat-window">
+            <div class="message user">Hello, AI!</div>
+            <div class="message assistant">Hello! How can I assist you today?</div>
+        </div>
+        <div class="input-area">
+            <input type="text" placeholder="Type your message..." />
+            <button class="fab">➤</button>
+            <button class="mic">🎤</button>
+        </div>
+        <div class="quick-access">
+            <div class="card">Set a Reminder</div>
+            <div class="card">Weather Update</div>
+            <div class="card">Search the Web</div>
+        </div>
+    </main>
+    <nav>
+        <ul>
+            <li>🏠 Home</li>
+            <li>📜 History</li>
+            <li>⚙️ Settings</li>
+            <li>❓ Help</li>
+        </ul>
+    </nav>
+</body>
+</html>
