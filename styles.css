@@ -20,4 +20,413 @@ header {
     border-radius: 20px;
     height: 400px;
     overflow-y: scroll;
+    padding: 10px;
+    margin: 20px;
+}
+
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.message.user {
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+.message.assistant {
+    background: #e0e7ee;
+    color: black;
+    align-self: flex-start;
+}
+
+.input-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.input-area button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.quick-access {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.card {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    background: #007bff;
+    color: white;
+    border-radius: 20px 20px 0 0;
+    margin: 0;
+    padding: 10px 0;
+}
+
+nav ul li {
+    cursor: pointer;
+}
+/* Base styling for recording indicator */
+.recording-indicator {
+    display: none; /* Start hidden */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Recording logo with microphone and animated waves */
+.recording-logo {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+/* Mic icon */
+.mic-icon {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 2;
+    position: absolute;
+}
+
+/* Animated waves around the mic icon */
+.wave {
+    position: absolute;
+    border: 2px solid red;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: waveAnimation 1.5s ease-out infinite;
+}
+
+.wave1 {
+    width: 30px;
+    height: 30px;
+    top: -3px;
+    left: -3px;
+    animation-delay: 0s;
+}
+
+.wave2 {
+    width: 38px;
+    height: 38px;
+    top: -7px;
+    left: -7px;
+    animation-delay: 0.3s;
+}
+
+.wave3 {
+    width: 46px;
+    height: 46px;
+    top: -11px;
+    left: -11px;
+    animation-delay: 0.6s;
+}
+
+/* Text styling */
+.recording-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Keyframes for the wave animation */
+@keyframes waveAnimation {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Fade-in animation for the indicator */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Center the animation on the screen */
+.center-screen {
+    display: none; /* Hide initially */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    pointer-events: none; /* Click-through */
+}
+
+/* Outer glowing circle */
+.oouter-circle {
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(255, 204, 0, 0.7);
+    border-radius: 50%;
+    animation: rotate 5s linear infinite, glow 1.5s ease-in-out infinite alternate;
+    position: absolute;
+    box-shadow: 0 0 12px 4px rgba(255, 204, 0, 0.3);
+}
+
+/* Inner circle with a pulsing effect */
+.iinner-circle {
+    width: 140px;
+    height: 140px;
+    border: 2px solid rgba(255, 153, 0, 0.5);
+    border-radius: 50%;
+    animation: rotateReverse 5s linear infinite, pulse 2s infinite;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    box-shadow: 0 0 8px 2px rgba(255, 153, 0, 0.3);
+}
+
+/* Core pulse effect */
+.core {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 102, 0, 0.8);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseCore 1.5s infinite;
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+}
+
+/* Keyframes for rotating outer and inner circles */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateReverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Keyframe for pulsing inner circle */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Keyframe for core pulse effect */
+@keyframes pulseCore {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.5); opacity: 1; }
+}
+
+/* Keyframe for glow animation */
+@keyframes glow {
+    0% { box-shadow: 0 0 12px 4px rgba(255, 204, 0, 0.3); }
+    100% { box-shadow: 0 0 16px 6px rgba(255, 204, 0, 0.5); }
+}
+
+
+/* Container centered on the screen */
+.hhologram-container {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: blur(0.5px);
+}
+
+/* Outer circle with intricate rotation */
+.outer-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed rgba(255, 165, 0, 0.7);
+    border-radius: 50%;
+    animation: rotateOuter 6s linear infinite;
+    box-shadow: 0 0 12px rgba(255, 165, 0, 0.6);
+}
+
+/* Middle circle for depth */
+.middle-circle {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    border: 2px solid rgba(255, 140, 0, 0.6);
+    border-radius: 50%;
+    top: 15%;
+    left: 15%;
+    animation: rotateMiddle 8s linear infinite;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+/* Inner circle, rotating in reverse */
+.inner-circle {
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    border: 2px solid rgba(255, 69, 0, 0.6);
+    border-radius: 50%;
+    top: 30%;
+    left: 30%;
+    animation: rotateInner 4s linear infinite reverse;
+    box-shadow: 0 0 8px rgba(255, 69, 0, 0.4);
+}
+
+/* Core glowing pulse effect */
+.hologram-core {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 215, 0, 0.8);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.6);
+    animation: pulseCore 1.5s infinite;
+}
+
+/* Keyframe animations for rotating circles */
+@keyframes rotateOuter {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateMiddle {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateInner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Core pulsing effect */
+@keyframes pulseCore {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.5); opacity: 1; }
+}
+/* Hologram container centered on the screen */
+.hologram-container {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* Horizontal rotating ring */
+.horizontal-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(0, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: rotateHorizontal 5s linear infinite;
+    transform-origin: center;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Vertical rotating ring */
+.vertical-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(255, 255, 0, 0.6);
+    border-radius: 50%;
+    transform: rotateX(90deg); /* Tilted vertically */
+    animation: rotateVertical 5s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+}
+
+/* Core glow in the center */
+.core-glow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 215, 0, 0.8);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0.6);
+    animation: pulseCore 1.5s infinite;
+}
+
+/* Horizontal rotation animation */
+@keyframes rotateHorizontal {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Vertical rotation animation */
+@keyframes rotateVertical {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Core pulsing effect */
+@keyframes pulseCore {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.5); opacity: 1; }
 }

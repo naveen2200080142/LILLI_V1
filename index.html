@@ -5,17 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Assistant</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        const { api } = window;
-    
-        // Send messages to the main process
-        api.send('message', 'Hello from the renderer process!');
-    
-        // Receive messages from the main process (e.g., Python script output)
-        window.addEventListener('ipc-message', (event, arg) => {
-            console.log(arg); // Handle the message from the Python script
-        });
-    </script>
+    <script defer src="renderer.js"></script>
 </head>
 <body>
     <header>
@@ -23,14 +13,22 @@
         <div class="user-profile">👤</div>
     </header>
     <main>
-        <div class="chat-window">
+        <nav>
+            <ul>
+                <li>🏠 Home</li>
+                <li>📜 History</li>
+                <li>⚙️ Settings</li>
+                <li>❓ Help</li>
+            </ul>
+        </nav>
+        <div class="chat-window" id="chat-window">
             <div class="message user">Hello, AI!</div>
             <div class="message assistant">Hello! How can I assist you today?</div>
         </div>
         <div class="input-area">
-            <input type="text" placeholder="Type your message..." />
-            <button class="fab">➤</button>
-            <button class="mic">🎤</button>
+            <input type="text" id="user-input" placeholder="Type your message..." />
+            <button class="fab" id="send-button">➤</button>
+            <button class="mic" id="mic-button">🎤</button>
         </div>
         <div class="quick-access">
             <div class="card">Set a Reminder</div>
@@ -38,13 +36,33 @@
             <div class="card">Search the Web</div>
         </div>
     </main>
-    <nav>
-        <ul>
-            <li>🏠 Home</li>
-            <li>📜 History</li>
-            <li>⚙️ Settings</li>
-            <li>❓ Help</li>
-        </ul>
-    </nav>
+   
+    <div class="recording-indicator" id="recording-indicator">
+        <div class="recording-logo">
+            <div class="mic-icon"></div>
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+        <span class="recording-text">Recording...</span>
+    </div>
+    <div class="center-screen" id="recording-animation">
+        <div class="oouter-circle"></div>
+        <div class="iinner-circle"></div>
+        <div class="core"></div>
+    </div>
+    <div class="hhologram-container" id="hologram-container">
+        <div class="hologram-circle outer-circle"></div>
+        <div class="hologram-circle middle-circle"></div>
+        <div class="hologram-circle inner-circle"></div>
+        <div class="hologram-core"></div>
+    </div>
+    <div class="hologram-container" id="hologram-container">
+        <div class="horizontal-ring"></div>
+        <div class="vertical-ring"></div>
+        <div class="core-glow"></div>
+    </div>
+    
+    
 </body>
 </html>
